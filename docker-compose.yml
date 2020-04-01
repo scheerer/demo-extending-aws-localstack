@@ -1,0 +1,17 @@
+---
+version: '3.4'
+
+services:
+  aws-localstack:
+    build:
+      context: ./aws-localstack
+      dockerfile: Dockerfile
+    ports:
+      - "4567-4599:4567-4599"
+      - "7070:8080"
+    environment:
+      - SERVICES=s3
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "~/localstack:/tmp/localstack"
